@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.uit.relation_manager.dao.RelationInfoMapper">
+    <resultMap id="RelationInfoAdapter" type="com.syh.uit.relation_manager.model.RelationInfo">
+        <result column="" property=""/>
+    </resultMap>
+    <select id="getRelationInfoByRID" resultMap="RelationInfoAdapter" resultType="com.syh.uit.relation_manager.model.RelationInfo">
+        SELECT
+    </select>
+</mapper>

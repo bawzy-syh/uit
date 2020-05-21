@@ -1,0 +1,31 @@
+###relation
+
+server:
+  port: 9010
+
+spring:
+  application:
+    name: relation-manager-app
+  security:
+    user:
+      name: relation
+      password: relation123
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/uit2?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: qwer1234
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://uit:uit123uit@127.0.0.1:9100/eureka
+    register-with-eureka: true
+    fetch-registry: true
+mybatis:
+  type-aliases-package: com.syh.uit.friend_apply_service.model
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+serviceURL:
+  IDGeneratorURL: http://id-worker-app

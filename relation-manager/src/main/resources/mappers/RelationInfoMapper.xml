@@ -4,7 +4,12 @@
     <resultMap id="RelationInfoAdapter" type="com.syh.uit.relation_manager.model.RelationInfo">
         <result column="" property=""/>
     </resultMap>
-    <select id="getRelationInfoByRID" resultMap="RelationInfoAdapter" resultType="com.syh.uit.relation_manager.model.RelationInfo">
-        SELECT
+    <select id="ifRelationExist" resultType="java.lang.Integer">
+        SELECT count(*) FROM relation_info WHERE (uid=#{id1} AND tid=#{id2})OR(uid=#{id2} AND tid=#{id1})
     </select>
+
+    <select id="getRelationInfoByID" resultMap="RelationInfoAdapter" resultType="com.syh.uit.relation_manager.model.RelationInfo">
+        SELECT relation_id,binding_id,uid,tid,pet_name,'group' FROM relation_info WHERE relation_id=#{relationID}
+    </select>
+
 </mapper>

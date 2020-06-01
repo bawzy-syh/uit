@@ -5,7 +5,9 @@
         <result column="" property=""/>
     </resultMap>
     <select id="ifRelationExist" resultType="java.lang.Integer">
-        SELECT count(*) FROM relation_info WHERE (uid=#{id1} AND tid=#{id2})OR(uid=#{id2} AND tid=#{id1})
+        SELECT count(*) FROM relation_info WHERE (uid=#{id1} AND tid=#{id2})
+        UNION
+        SELECT count(*) FROM relation_info WHERE(uid=#{id2} AND tid=#{id1})
     </select>
 
     <select id="getRelationInfoByID" resultMap="RelationInfoAdapter" resultType="com.syh.uit.relation_manager.model.RelationInfo">

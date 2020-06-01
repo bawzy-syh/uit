@@ -1,0 +1,30 @@
+###relation
+
+server:
+  port: 8100
+
+spring:
+  application:
+    name: basic-info-app
+  security:
+    user:
+      name: basic_info
+      password: basic_info
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/uit2?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: qwer1234
+eureka:
+  client:
+    service-url:
+      defaultZone: http://uit:uit123uit@127.0.0.1:9100/eureka
+    register-with-eureka: true
+    fetch-registry: true
+mybatis:
+  type-aliases-package: com.syh.uit.basic_info.model
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+serviceURL:
+  relation-manager-URL: http://relation-manager-app

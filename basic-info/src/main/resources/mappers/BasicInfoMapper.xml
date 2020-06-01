@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.uit.basic_info.dao.BasicInfoMapper">
+    <resultMap id="BasicInfoAdapter" type="com.syh.uit.basic_info.model.BasicInfo">
+        <result column="UNIX_TIMESTAMP(update_time)" property="update_time"/>
+    </resultMap>
+    <select id="getBasicInfoByUID" resultMap="BasicInfoAdapter" resultType="com.syh.uit.basic_info.model.BasicInfo">
+        SELECT uid, pet_name, sign, gender, birthday, icon_path, UNIX_TIMESTAMP(update_time) FROM basic_info WHERE uid=#{uid}
+    </select>
+    <update id="updateBasicInfo" parameterType="com.syh.uit.basic_info.model.BasicInfo">
+        UPDATE basic_info
+        <trim prefix="SET" suffixOverrides=",">
+            update_time = CURRENT_TIMESTAMP ,
+            <if test="petName!=null">state = #{state},</if>
+            <if test="sign!=null">pet_name = #{petName},</if>
+            <if test="gender!=null">`group` = #{group},</if>
+            <if test="birthday!=null">comment = #{comment},</if>
+        </trim>
+        WHERE
+        uid = #{uid};
+    </update>
+
+</mapper>

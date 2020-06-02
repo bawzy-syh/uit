@@ -47,24 +47,17 @@ public class BasicInfoController {
 
     /**
      * @apiNote 更新部分基本信息
-     * @param updateBasicInfoRequest
+     * @param updateBasicInfoRequest request to update
      */
-    @RequestMapping(value = "/{uid}" ,method = {RequestMethod.PATCH})
+    @RequestMapping(value = "/self" ,method = {RequestMethod.PATCH})
     @ResponseStatus(HttpStatus.CREATED)
-    private void updateSelfInfo(@PathVariable String uid, @RequestBody UpdateBasicInfoRequest updateBasicInfoRequest)throws APIGeneralException {
-        int int_uid;
-        try {
-            int_uid = Integer.parseInt(uid);
-        }catch (NumberFormatException e){
-            throw new BadRequestException(uid+" is not valid uid");
-        }
-        updateBasicInfoRequest.setUid(int_uid);
+    private void updateSelfInfo(@RequestBody UpdateBasicInfoRequest updateBasicInfoRequest)throws APIGeneralException {
         basicInfoService.updateBasicInfo(updateBasicInfoRequest);
     }
-    @RequestMapping(value = "/{uid}" ,method = {RequestMethod.PUT})
+    @RequestMapping(value = "/self" ,method = {RequestMethod.PUT})
     @ResponseStatus(HttpStatus.CREATED)
-    private void updateAllSelfInfo(@PathVariable String uid, @RequestBody@Valid UpdateBasicInfoRequest updateBasicInfoRequest)throws APIGeneralException {
-        this.updateSelfInfo(uid, updateBasicInfoRequest);
+    private void updateAllSelfInfo(@RequestBody@Valid UpdateBasicInfoRequest updateBasicInfoRequest)throws APIGeneralException {
+        this.updateSelfInfo(updateBasicInfoRequest);
     }
 
 }

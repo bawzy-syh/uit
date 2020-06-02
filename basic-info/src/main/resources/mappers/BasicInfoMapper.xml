@@ -11,10 +11,11 @@
         UPDATE basic_info
         <trim prefix="SET" suffixOverrides=",">
             update_time = CURRENT_TIMESTAMP ,
-            <if test="petName!=null">state = #{state},</if>
-            <if test="sign!=null">pet_name = #{petName},</if>
-            <if test="gender!=null">`group` = #{group},</if>
-            <if test="birthday!=null">comment = #{comment},</if>
+            <if test="petName!=null"> pet_name= #{petName},</if>
+            <if test="sign!=null">sign = #{sign},</if>
+            <if test="gender!=null">gender = #{gender},</if>
+            <if test="birthday!=null">birthday = #{birthday},</if>
+            <if test="iconPath!=null">icon_path = #{iconPath},</if>
         </trim>
         WHERE
         uid = #{uid};

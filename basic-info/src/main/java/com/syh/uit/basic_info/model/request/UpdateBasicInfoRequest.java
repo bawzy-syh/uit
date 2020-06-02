@@ -1,10 +1,12 @@
 package com.syh.uit.basic_info.model.request;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 public class UpdateBasicInfoRequest {
-    private int uid;
+    @Null
+    private Integer uid;
     @NotNull(message = "petName can not be null")
     private final String petName;
     @NotNull(message = "sign can not be null")

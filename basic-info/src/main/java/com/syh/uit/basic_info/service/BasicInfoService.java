@@ -6,6 +6,7 @@ import com.syh.uit.basic_info.model.request.UpdateBasicInfoRequest;
 import com.syh.uit.basic_info.model.response.BasicInfoResponse;
 import com.syh.uit.basic_info.model.response.SelfBasicInfoResponse;
 import com.syh.uit.exception.exception.APIGeneralException;
+import com.syh.uit.exception.exception.BadRequestException;
 import com.syh.uit.exception.exception.ResourceNoAuthException;
 import com.syh.uit.exception.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,30 +43,36 @@ public class BasicInfoService {
     }
     public BasicInfo getBasicInfoById(int uid)throws APIGeneralException{
         BasicInfo stored = basicInfoMapper.getBasicInfoByUID(uid);
+        if (stored==null){
+            throw new ResourceNotFoundException(uid+" not found");
+        }
         BasicInfoResponse response = new BasicInfoResponse(stored);
         try {
             boolean isFriend = relationQueryService.hasRelation(getAuth(),uid);
             response.setIsFriend(isFriend ? BasicInfoResponse.FriendStatus.TRUE.getCode() :
                     BasicInfoResponse.FriendStatus.FALSE.getCode());
         }catch (Exception e){
-            response.setIsFriend(-1);
+            response.setIsFriend(BasicInfoResponse.FriendStatus.UNKNOWN.getCode());
         }
-
         return response;
-
     }
     public void updateBasicInfo(UpdateBasicInfoRequest request) throws APIGeneralException{
+        request.setUid(getAuth());
         BasicInfo stored = basicInfoMapper.getBasicInfoByUID(request.getUid());
         if (stored==null){
             throw new ResourceNotFoundException(request.getUid()+"not found");
         }
-        if (getAuth()!=stored.getUid()){
-            throw new ResourceNoAuthException("No Auth to do this operation");
-        }
         //todo:所有更改的内容需要认证
         stored.setPetName(request.getPetName());
         stored.setSign(request.getSign());
-        stored.setGender(request.getGender());
+        if (request.getGender()!=null){
+            try{
+                BasicInfo.Genders genders = BasicInfo.Genders.getByCode(request.getGender());
+                stored.setGender(genders.getCode());
+            }catch (IllegalArgumentException e){
+                throw new BadRequestException(request.getGender()+" is illegal");
+            }
+        }
         stored.setIconPath(request.getIconPath());
         stored.setBirthday(request.getBirthday());
         basicInfoMapper.updateBasicInfo(stored);

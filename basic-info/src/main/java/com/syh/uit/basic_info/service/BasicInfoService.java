@@ -70,7 +70,7 @@ public class BasicInfoService {
                 BasicInfo.Genders genders = BasicInfo.Genders.getByCode(request.getGender());
                 stored.setGender(genders.getCode());
             }catch (IllegalArgumentException e){
-                throw new BadRequestException(request.getGender()+" is illegal");
+                throw new BadRequestException(request.getGender()+" is illegal gender");
             }
         }
         stored.setIconPath(request.getIconPath());

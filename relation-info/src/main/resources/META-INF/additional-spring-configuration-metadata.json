@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "relation-info-service.pet-name-max-length",
+      "type": "java.lang.Integer",
+      "description": "Description for relation-info-service.pet-name-max-length."
+    }
+  ] }

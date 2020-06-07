@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.uit.friend_apply_service.dao.ApplyMapper">
+
+<resultMap id="FriendApplyAdapter" type="com.syh.uit.friend_apply_service.model.FriendApply">
+    <result column="UNIX_TIMESTAMP(apply_time)" property="applyTime" />
+</resultMap>
+
+    <select id="getApplyByApplyID" resultMap="FriendApplyAdapter" resultType="com.syh.uit.friend_apply_service.model.FriendApply">
+        SELECT
+        application_id, apply_id, target_id, pet_name, `group`, comment, UNIX_TIMESTAMP(apply_time), state
+        FROM
+        friend_apply
+        WHERE application_id = #{aid} AND is_show=true
+    </select>
+
+    <select id="getApplyByTargetID" resultMap="FriendApplyAdapter" resultType="com.syh.uit.friend_apply_service.model.FriendApply">
+        SELECT
+            application_id, apply_id, target_id, pet_name, `group`, comment, UNIX_TIMESTAMP(apply_time), state
+        FROM
+            friend_apply
+        WHERE target_id = #{tid} AND is_show=true AND state = -1
+    </select>
+
+    <select id="getApplyByApplicantID" resultMap="FriendApplyAdapter" resultType="com.syh.uit.friend_apply_service.model.FriendApply">
+        SELECT
+            application_id, apply_id, target_id, pet_name, `group`, comment, UNIX_TIMESTAMP(apply_time), state
+        FROM
+            friend_apply
+        WHERE apply_id = #{applicantID} AND is_show=true
+    </select>
+    
+    <select id="getUnDoneApplyCountByUserID" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM
+            friend_apply
+        WHERE
+        ((apply_id=#{id1} AND target_id=#{id2})OR(apply_id=#{id2} AND target_id=#{id1})) AND is_show=true AND state = -1
+
+    </select>
+    
+    <insert id="insertApply" parameterType="com.syh.uit.friend_apply_service.model.FriendApply">
+        INSERT INTO friend_apply (application_id, apply_id, target_id, pet_name, `group`, comment, apply_time, state)
+        VALUES (#{applicationID},#{applyID},#{targetID},#{petName},#{group},#{comment},FROM_UNIXTIME(#{applyTime}),#{state})
+    </insert>
+
+    <update id="deleteApply" parameterType="java.lang.Long">
+        UPDATE friend_apply SET is_show=false WHERE application_id=#{id}
+    </update>
+
+    <update id="updateApply" parameterType="com.syh.uit.friend_apply_service.model.FriendApply">
+        UPDATE friend_apply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state >= -1">state = #{state},</if>
+            <if test="petName!=null">pet_name = #{petName},</if>
+            <if test="group >= 0">`group` = #{group},</if>
+            <if test="comment!=null">comment = #{comment},</if>
+        </trim>
+        WHERE
+        application_id = #{applicationID};
+    </update>
+</mapper>

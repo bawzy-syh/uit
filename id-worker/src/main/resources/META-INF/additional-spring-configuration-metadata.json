@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "id-worker.worker",
+      "type": "java.lang.Integer",
+      "description": "Description for id-worker.worker-id."
+    },
+    {
+      "name": "id-worker.dataCenter",
+      "type": "java.lang.Integer",
+      "description": "Description for id-worker.dataCenter-id."
+    }
+  ]
+}

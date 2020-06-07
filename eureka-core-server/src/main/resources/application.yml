@@ -1,0 +1,27 @@
+###eureka-core
+###服务端口号
+server:
+  port: 9100
+
+###服务名称
+spring:
+  application:
+    name: app-eureka-center
+  security:
+    user:
+      name: uit
+      password: uit123uit
+
+
+eureka:
+  instance:
+    #注册中心地址
+    hostname: 127.0.0.1
+  ###客户端调用地址
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:9100/eureka/
+    ###是否将自己注册到Eureka服务中,因为该应用本身就是注册中心，不需要再注册自己（集群的时候为true）
+    register-with-eureka: false
+    ###是否从Eureka中获取注册信息,因为自己为注册中心,不会在该应用中的检索服务信息
+    fetch-registry: false

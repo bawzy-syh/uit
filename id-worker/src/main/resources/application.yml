@@ -1,0 +1,14 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: id-worker-app
+eureka:
+  client:
+    service-url:
+      defaultZone: http://uit:uit123uit@127.0.0.1:9100/eureka
+    register-with-eureka: true
+    fetch-registry: true
+id-worker:
+  worker: 0
+  dataCenter: 0

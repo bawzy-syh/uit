@@ -1,0 +1,18 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: zuul-gateway-app
+zuul:
+  routes:
+    friend-apply-service:
+      path: /friend-apply/**
+      serviceid: friend-apply-app
+      sensitive-headers: Cookie,Set-Cookie
+  prefix: /api
+eureka:
+  client:
+    service-url:
+      defaultZone: http://uit:uit123uit@127.0.0.1:9100/eureka
+    register-with-eureka: true
+    fetch-registry: true

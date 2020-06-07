@@ -1,0 +1,33 @@
+###服务端口号
+server:
+  port: 8081
+###服务名称
+spring:
+  application:
+    name: auth-app
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/uit2
+    username: root
+    password: qwer1234
+
+###服务注册到eureka注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://uit:uit123uit@127.0.0.1:9100/eureka
+    ###注册到注册中心
+    register-with-eureka: true
+    ###从eureka上检索服务
+    fetch-registry: true
+mybatis:
+  type-aliases-package: com.syh.uit.auth_service.model
+  mapper-locations: classpath:mappers/*.xml

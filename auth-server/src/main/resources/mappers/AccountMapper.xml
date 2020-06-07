@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.uit.auth_service.dao.AccountDAO">
+    <sql id="BASE_TABLE">
+        account
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        uid,password
+    </sql>
+
+    <select id="getAccountByID" resultType="com.syh.uit.auth_service.model.Account">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM 
+        <include refid="BASE_TABLE"/>
+        WHERE uid = #{id}
+    </select>
+</mapper>

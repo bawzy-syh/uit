@@ -1,5 +1,6 @@
 package com.syh.uit.snowflake_generator.util;
 
+import com.syh.uit.id_worker.util.SnowflakeIdWorker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

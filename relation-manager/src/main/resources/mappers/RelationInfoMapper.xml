@@ -11,7 +11,7 @@
     </select>
 
     <select id="getRelationInfoByID" resultMap="RelationInfoAdapter" resultType="com.syh.uit.relation_manager.model.RelationInfo">
-        SELECT relation_id,binding_id,uid,tid,pet_name,'group' FROM relation_info WHERE relation_id=#{relationID}
+        SELECT relation_id,binding_id,uid,tid,pet_name,`group` FROM relation_info WHERE relation_id=#{relationID}
     </select>
 
 </mapper>

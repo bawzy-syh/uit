@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "relation-info-service", ignoreUnknownFields = true)
+@ConfigurationProperties(prefix = "relation-info-service")
 public class RelationInfoServiceConfig {
     private Integer petNameMaxLength;
 

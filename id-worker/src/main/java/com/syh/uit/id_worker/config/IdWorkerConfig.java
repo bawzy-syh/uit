@@ -1,4 +1,4 @@
-package com.syh.uit.snowflake_generator.config;
+package com.syh.uit.id_worker.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.syh.uit.snowflake_generator.util;
+package com.syh.uit.id_worker.util;
 
 public class SnowflakeIdWorker {
     // ==============================Fields===========================================

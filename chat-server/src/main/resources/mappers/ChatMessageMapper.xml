@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.uit.chat_server.dao.ChatMessageMapper">
+
+    <resultMap id="ChatMessageAdapter" type="com.syh.uit.chat_server.model.ChatMessage">
+        <result column="UNIX_TIMESTAMP(update_time)" property="update_time"/>
+    </resultMap>
+
+    <insert id="insertChatMessage" parameterType="com.syh.uit.chat_server.model.ChatMessage">
+        INSERT INTO chat_message_history(message_id, relation_id, content, `timestamp`)
+        VALUES (#{messageID},#{relationID},#{content},FROM_UNIXTIME(#{timestamp}))
+    </insert>
+
+</mapper>

@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "ucc.multi-redis-source.online-state.host",
+      "type": "java.lang.String",
+      "description": "Description for multi-redis-source.online-state.host."
+    },
+    {
+      "name": "ucc.multi-redis-source.online-state.port",
+      "type": "java.lang.Integer",
+      "description": "Description for multi-redis-source.online-state.port."
+    },
+    {
+      "name": "ucc.multi-redis-source.online-state.password",
+      "type": "java.lang.String",
+      "description": "Description for multi-redis-source.online-state.password."
+    },
+    {
+      "name": "ucc.multi-redis-source.online-state.database",
+      "type": "java.lang.Integer",
+      "description": "Description for multi-redis-source.online-state.database."
+    },
+    {
+      "name": "ucc.multi-redis-source.online-state.jedis.pool.max-active",
+      "type": "java.lang.Integer",
+      "description": "Description for multi-redis-source.online-state.jedis.pool.max-active."
+    },
+    {
+      "name": "ucc.user-online-state.endpoints-name",
+      "type": "java.util.List",
+      "description": "Description for ucc.user-online-state.endpoints-name."
+    }
+  ] }

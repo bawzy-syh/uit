@@ -3,9 +3,9 @@ package com.syh.uit.exception.exception;
 import org.springframework.http.HttpStatus;
 
 public class APIGeneralException extends Exception {
-    private HttpStatus status;
-    private String error;
-    private String description;
+    private final HttpStatus status;
+    private final String error;
+    private final String description;
 
     APIGeneralException(HttpStatus status, String error, String description){
         this.status = status;

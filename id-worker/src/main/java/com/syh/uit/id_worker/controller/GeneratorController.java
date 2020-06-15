@@ -1,6 +1,6 @@
-package com.syh.uit.snowflake_generator.controller;
+package com.syh.uit.id_worker.controller;
 
-import com.syh.uit.snowflake_generator.service.GeneratorService;
+import com.syh.uit.id_worker.service.GeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

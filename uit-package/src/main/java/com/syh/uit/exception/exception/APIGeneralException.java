@@ -7,7 +7,7 @@ public class APIGeneralException extends Exception {
     private final String error;
     private final String description;
 
-    APIGeneralException(HttpStatus status, String error, String description){
+    public APIGeneralException(HttpStatus status, String error, String description){
         this.status = status;
         this.error = error;
         this.description = description;

@@ -18,7 +18,7 @@ public class PushController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     private void pushRequest(@Valid @RequestBody PushRequest pushRequest) throws APIGeneralException {
         deliverService.processPushRequest(pushRequest);
     }

@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
     public APIErrorResponse UnknownExceptionHandler(HttpServletRequest req, Exception e){
-        logger.error("Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
+        logger.error("Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage(),e);
         return new ApiErrorResponseBuilder()
                 .withError("Unknown Error")
                 .withError_description(e.toString())

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OnlineStateService {
@@ -24,13 +25,13 @@ public class OnlineStateService {
     }
 
     UserOnlineState getOnlineState(int uid){
-        String[] raw_data = (String[]) redisTemplate.opsForValue().get(uid+"");
+        Set<Object> raw_data = redisTemplate.opsForSet().members(uid+"");
         List<Endpoint> result = new ArrayList<>();
         //不存在即没任何设备在线
         if (raw_data==null)return new UserOnlineState(result);
-        for (String name: raw_data){
+        for (Object name: raw_data){
             try{
-                result.add(endpointConverter.convertByName(name));
+                result.add(endpointConverter.convertByName(String.valueOf(name)));
             }catch (IllegalArgumentException e){
                 //数据库中存储出错,清除
                 removeKey(uid+"");

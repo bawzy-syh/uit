@@ -5,7 +5,7 @@ public class FriendApply {
     private final int applyID;
     private final int targetID;
     private String petName;
-    private int group;
+    private long group;
     private String comment;
     private final long applyTime;
     private int state;
@@ -29,7 +29,7 @@ public class FriendApply {
         }
     }
 
-    public FriendApply(long applicationID, int applyID, int targetID, String petName, int group, String comment, long applyTime, int state) {
+    public FriendApply(long applicationID, int applyID, int targetID, String petName, long group, String comment, long applyTime, int state) {
         this.applicationID = applicationID;
         this.applyID = applyID;
         this.targetID = targetID;
@@ -57,7 +57,7 @@ public class FriendApply {
         return petName;
     }
 
-    public int getGroup() {
+    public long getGroup() {
         return group;
     }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.uit.relation_group_info.dao.GroupInfoMapper">
+
+    <resultMap id="GroupInfoAdapter" type="com.syh.uit.relation_group_info.model.GroupInfo">
+        <result column="UNIX_TIMESTAMP(update_time)" property="update_time"/>
+    </resultMap>
+
+    <select id="getGroupInfoByUID" resultType="com.syh.uit.relation_group_info.model.GroupInfo">
+        SELECT group_id, title, user_id, `order` FROM relation_group_info WHERE user_id=#{uid} ORDER BY `order` ASC
+    </select>
+
+    <insert id="updateGroupList" parameterType="java.util.List">
+        INSERT INTO relation_group_info (group_id, title, user_id, `order`, creat_timestamp) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.groupID,jdbcType=BIGINT},#{item.title,jdbcType=VARCHAR},#{item.userID,jdbcType=INTEGER},#{item.order,jdbcType=INTEGER},CURRENT_TIMESTAMP)
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        group_id = values (group_id), title = values (title), user_id = values (user_id),
+        `order` = values (`order`), creat_timestamp = values (creat_timestamp)
+    </insert>
+
+    <delete id="deleteGroupInfoByGroupID" parameterType="java.lang.Long">
+        DELETE FROM relation_group_info WHERE group_id=#{uid}
+    </delete>
+
+    <delete id="deleteGroupList" parameterType="java.util.List">
+        DELETE FROM relation_group_info WHERE group_id IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

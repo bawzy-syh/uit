@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: auth-app
+  security:
+    user:
+      name: auth_server
+      password: auth_server
   redis:
     database: 0
     host: localhost

@@ -1,18 +1,18 @@
 package com.syh.uit.auth_service.model;
 
 public class Account {
-    private String id;
-    private String password;
+    private final String id;
+    private final String encodedPassword;
 
-    public Account(String id,String password){
+    public Account(String id,String encodedPassword){
         this.id = id;
-        this.password = password;
+        this.encodedPassword = encodedPassword;
     }
     public String getId() {
         return id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEncodedPassword() {
+        return encodedPassword;
     }
 }

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountDAO {
-    Account getAccountByID(String id);
+    Account getAccountByID(int id);
 }

@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "myConfig.IDGeneratorURL",
-      "type": "java.lang.String",
-      "description": "Description for myConfig.IDGeneratorURL."
-  }
-] }

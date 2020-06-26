@@ -2,14 +2,21 @@ server:
   port: 8000
 spring:
   application:
-    name: zuul-gateway-app
-zuul:
-  routes:
-    friend-apply-service:
-      path: /friend-apply/**
-      serviceid: friend-apply-app
-      sensitive-headers: Cookie,Set-Cookie
-  prefix: /api
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+#      routes:
+#        - id: auth
+#          uri: lb://auth-app
+#          predicates:
+#            - Path=/api/auth/**
+#          filters:
+#            - StripPrefix=1
+
 eureka:
   client:
     service-url:

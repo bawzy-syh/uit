@@ -1,44 +1,34 @@
 package com.syh.uit.gateway.filter;
 
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Component
-public class TokenFilter extends ZuulFilter {
+public class TokenFilter implements GlobalFilter, Ordered {
+    public final static String ATTRIBUTE_IGNORE_TokenFilter_FILTER = "@ignoreTokenFilter";
 
     @Override
-    public String filterType() {
-        return "pre";
-    }
-
-    //过滤器执行顺序
-    @Override
-    public int filterOrder() {
-        return 0;
-    }
-
-    //本过滤器是否被执行
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
-
-    @Override
-    public Object run() throws ZuulException {
-        RequestContext requestContext = RequestContext.getCurrentContext();
-        HttpServletRequest request = requestContext.getRequest();
-        String token = //request.getParameter("Authorization");
-        request.getHeader("Authorization");
-        if(token == null || "".equals(token)){
-            requestContext.setSendZuulResponse(false); // 过滤该请求，不对其进行路由
-            requestContext.setResponseStatusCode(401); // 设置响应状态码
-            requestContext.setResponseBody("token not found"); // 设置响应体
-            return null;
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        if (exchange.getAttribute(ATTRIBUTE_IGNORE_TokenFilter_FILTER) != null){
+            return chain.filter(exchange);
         }
-        return null;
+        List<String> token = exchange.getRequest().getHeaders().get("Authorization");
+        if (token==null || token.isEmpty()){
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        }
+        return chain.filter(exchange);
+    }
+
+    @Override
+    public int getOrder() {
+        return 1;
     }
 }
